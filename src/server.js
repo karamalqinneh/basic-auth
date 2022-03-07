@@ -17,7 +17,7 @@ app.set("view engine", "ejs");
 
 // middleware & static files
 app.use(express.json());
-app.use(express.static("../public"));
+app.use(express.static("public"));
 
 app.get("/", homeHandler);
 app.use(authRoute);
