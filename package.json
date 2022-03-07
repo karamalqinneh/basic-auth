@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/karamalqinneh/basic-auth#readme",
   "dependencies": {
+    "base-64": "^1.0.0",
+    "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "ejs": "^3.1.6",
