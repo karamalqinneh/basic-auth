@@ -10,19 +10,16 @@ const db = {};
 require("dotenv").config();
 
 const POSTGRES_URI =
-  process.env.NODE_ENV === "test" ? "sqlite:memory:" : process.env.DATABASE_URL; // npm i sqlite3
+  process.env.NODE_ENV === "test" ? "sqlite:memory:" : process.env.DATABASE_URL;
 
-let sequelizeOptions =
-  process.env.NODE_ENV === "production"
-    ? {
-        dialectOptions: {
-          ssl: {
-            require: true,
-            rejectUnauthorized: false,
-          },
-        },
-      }
-    : {};
+let sequelizeOptions = {
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+  },
+};
 
 let sequelize = new Sequelize(POSTGRES_URI, sequelizeOptions);
 
