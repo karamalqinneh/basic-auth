@@ -4,6 +4,9 @@ Creating an Express server that implements Basic Authentication, with signup and
 
 ## Submission
 
+1. [PR Link](https://github.com/karamalqinneh/basic-auth/pull/1)
+2. [Server Deployment](https://github.com/karamalqinneh/basic-auth/pull/1)
+
 ## UML Diagram
 
-[UML](./public/assets/basic-auth-UML.jpg)
+![UML](./public/assets/basic-auth-UML.jpg)
