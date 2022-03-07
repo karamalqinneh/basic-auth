@@ -4,11 +4,13 @@ const fs = require("fs");
 const path = require("path");
 const Sequelize = require("sequelize");
 const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || "development";
-const config = require(__dirname + "/../../config/config.json")[env];
+// const env = process.env.NODE_ENV || "development";
+// const config = require(__dirname + "/../../config/config.json")[env];
 const db = {};
+require("dotenv").config();
 
-let sequelize;
+const POSTGRES_URI =
+  process.env.NODE_ENV === "test" ? "sqlite:memory:" : process.env.DATABASE_URL; // npm i sqlite3
 
 let sequelizeOptions =
   process.env.NODE_ENV === "production"
@@ -22,19 +24,7 @@ let sequelizeOptions =
       }
     : {};
 
-if (config.use_env_variable) {
-  sequelize = new Sequelize(
-    process.env[config.use_env_variable],
-    sequelizeOptions
-  );
-} else {
-  sequelize = new Sequelize(
-    config.database,
-    config.username,
-    config.password,
-    sequelizeOptions
-  );
-}
+let sequelize = new Sequelize(POSTGRES_URI, sequelizeOptions);
 
 fs.readdirSync(__dirname)
   .filter((file) => {
