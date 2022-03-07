@@ -14,41 +14,25 @@ afterAll(async () => {
   await db.sequelize.drop();
 });
 
+beforeEach(async () => {
+  let body = {
+    username: "user1",
+    password: "testtest",
+  };
+  await request.post("/signup").send(body);
+});
+
 describe("testing basic_auth server", () => {
   it("POST to /signup to create a new user", async () => {
     let body = {
-      username: "user1",
+      username: "user",
       password: "testtest",
     };
-    const response = request
-      .post("/signup")
-      .set(body)
-      .then((res) => {
-        if (res.status !== httpStatus.OK) {
-          res.status = 404;
-          return res;
-        }
-        res.status = 201;
-        return res;
-      });
+    const response = await request.post("/signup").send(body);
     expect(response.status).toEqual(201);
   });
   it("POST to /signin to login as a user (use basic auth)", async () => {
-    let body = {
-      username: "user1",
-      password: "testtest",
-    };
-    const response = request
-      .post("/signin")
-      .set(body)
-      .then((res) => {
-        if (res.status !== httpStatus.OK) {
-          res.status = 404;
-          return res;
-        }
-        res.status = 201;
-        return res;
-      });
-    expect(response.status).toEqual(201);
+    const response = await request.post("/signin").auth("user1", "testtest");
+    expect(response.status).toEqual(200);
   });
 });
